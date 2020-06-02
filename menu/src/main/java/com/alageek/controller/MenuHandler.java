@@ -1,6 +1,7 @@
 package com.alageek.controller;
 
 import com.alageek.entity.Menu;
+import com.alageek.entity.MenuVO;
 import com.alageek.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,7 @@ public class MenuHandler {
     }
 
     @GetMapping("/findAll/{index}/{limit}")
-    public List<Menu> findAll(@PathVariable("index") int index,@PathVariable("limit") int limit){
-        return menuRepository.findAll(index,limit);
+    public MenuVO findAll(@PathVariable("index") int index,@PathVariable("limit") int limit){
+        return new MenuVO(0,"",menuRepository.count(), menuRepository.findAll(index, limit));
     }
 }

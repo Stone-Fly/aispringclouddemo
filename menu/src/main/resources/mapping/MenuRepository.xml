@@ -4,15 +4,23 @@
 
 <mapper namespace="com.alageek.repository.MenuRepository">
 
-     <select id="findAll" resultType="com.alageek.entity.Menu">
+    <resultMap id="menuMap" type="Menu">
+        <id column="id" property="id"></id>
+        <id column="name" property="name"></id>
+        <id column="price" property="price"></id>
+        <id column="flavor" property="flavor"></id>
+        <association property="type" select="com.alageek.repository.TypeRepository.findById" column="tid"></association>
+    </resultMap>
+
+     <select id="findAll" resultMap="menuMap">
          select * from t_menu limit #{param1},#{param2}
      </select>
 
-    <select id="count" resultType="Menu">
+    <select id="count" resultType="int">
          select count(id) from t_menu
      </select>
 
-    <select id="findById" resultType="Menu" parameterType="long">
+    <select id="findById" resultMap="menuMap" parameterType="long">
          select * from t_menu where id = #{id}
      </select>
 
