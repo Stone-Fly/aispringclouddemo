@@ -4,6 +4,10 @@
 
 <mapper namespace="com.alageek.repository.TypeRepository">
 
+    <select id="findAll" resultType="Type">
+        select * from t_type
+    </select>
+
     <select id="findById" resultType="Type" parameterType="long">
          select * from t_type where id = #{id}
      </select>
